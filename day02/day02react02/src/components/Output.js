@@ -1,4 +1,13 @@
 export default () => {
+    const todoListArr = [<tr>
+        <td colSpan={3}>미니프로젝트 만들기1</td>
+    </tr>,<tr>
+        <td colSpan={3}>미니프로젝트 만들기2</td>
+    </tr>,<tr>
+        <td colSpan={3}>미니프로젝트 만들기3</td>
+    </tr>,<tr>
+        <td colSpan={3}>미니프로젝트 만들기</td>
+    </tr>];
     return (<div>
         <table id="todoListTbl" class="table table-hover">
             <thead>
@@ -9,15 +18,7 @@ export default () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <input type="checkbox"></input>
-                    </td>
-                    <td>미니프로젝트 만들기</td>
-                    <td>
-                        <button class="btn btn-danger" type="button">Delete</button>
-                    </td>
-                </tr>
+                {todoListArr}
             </tbody>
         </table>
     </div>);
