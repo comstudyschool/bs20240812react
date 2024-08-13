@@ -2,7 +2,7 @@ export default ()=>{
     return(<div>
         <h1>Hello React world</h1>
         <button className='btn btn-primary'>클릭</button>
-        <table class="table table-dark table-hover">
+        <table className="table table-dark table-hover">
             <thead>
             <tr>
                 <th>Firstname</th>
