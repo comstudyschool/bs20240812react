@@ -1,12 +1,9 @@
+import { useState } from "react";
 import "./App.css";
-import {useState} from "react";
-import ItemRow from "./ItemRow";
 import Input from "./Input"
 import Output from "./Output";
 
 const App = ()=>{
-    // 전역변수를 state로 만들어 주어야 re rendering 된다.
-    // 구조분해 할당 = state변수, setter함수
     const [name, setName] = useState("Todo List");
     const [todoList, setTodoLilst] = useState([
         {no:101, title:"공부하기", done: false},
