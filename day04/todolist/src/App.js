@@ -31,7 +31,20 @@ const App = ()=>{
             return todo.no != no;
         });
         setTodoLilst(newList);
-    }
+    };
+
+    const onDoneFlag = ({no, title, done})=>{
+        const newTodoList = [...todoList];
+        todoList.forEach((item, idx)=> {
+            if(item.no == no) {
+                newTodoList[idx].done = !done;
+            }
+        });
+        setTodoLilst(newTodoList);
+    };
+
+    // 취소선 스타일 설정
+    const lineThroughClass = {textDecoration:"line-through", color:"blue"}
 
     return (<div className="todoList">
         <div className="App-header">
@@ -64,10 +77,12 @@ const App = ()=>{
                         <div className="input-group mb-3">
                               <div className="input-group-prepend">
                                 <div className="input-group-text">
-                                <input type="checkbox" />
+                                <input onChange={()=>{
+                                    onDoneFlag(item);
+                                }} checked={item.done&&"checked"} type="checkbox" />
                                 </div>
                               </div>
-                                <input type="text" className="form-control" readOnly value={item.title} />
+                                <input style={ item.done?lineThroughClass:{}} type="text" className="form-control" readOnly value={item.title} />
                                 <div className="input-group-append">
                                     <button className="btn btn-primary" type="button">Edit</button>  
                                     <button onClick={()=>{
