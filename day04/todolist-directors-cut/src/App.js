@@ -1,29 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Input from "./Input"
 import Output from "./Output";
+import axios from "axios";
 
 const App = ()=>{
     const [name, setName] = useState("Todo List");
-    const [todoList, setTodoLilst] = useState([
-        {no:101, title:"공부하기", done: false},
-        {no:102, title:"자바하기", done: true},
-        {no:103, title:"리액트하기", done: false},
-        {no:104, title:"스프링하기", done: false}
-    ]);
-    const [noCnt, setNoCnt] = useState(105);
+    const [todoList, setTodoLilst] = useState([]);
+    //const [noCnt, setNoCnt] = useState(105);
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/todo").then((response) => {
+            setTodoLilst(response['data']);
+        });
+    }, []);
 
     const onClickEvent = (inputTitle) => {
         // 기존 내용에 새 내용을 추가 해서 새 배열을 생성
-        setTodoLilst([...todoList, {no:noCnt, title:inputTitle, done: false}]);
-        setNoCnt(noCnt+1);
+        //setTodoLilst([...todoList, {no:noCnt, title:inputTitle, done: false}]);
+        //setNoCnt(noCnt+1);
+        let newTodo = {title:inputTitle, done: false};
+        axios.post("http://localhost:5000/todo", newTodo).then((response) => {
+            setTodoLilst(response['data']);
+        });
     }
 
     const onDelete = ({no, title, done}) => {
-        const newList = todoList.filter((todo)=> {
-            return todo.no != no;
+        // const newList = todoList.filter((todo)=> {
+        //     return todo.no != no;
+        // });
+        // setTodoLilst(newList);
+        console.log(no);
+        axios.get("http://localhost:5000/todo/delete?no="+no).then((response) => {
+            setTodoLilst(response['data']);
         });
-        setTodoLilst(newList);
     };
 
     const onDoneFlag = ({no, title, done})=>{
