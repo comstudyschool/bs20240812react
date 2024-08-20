@@ -40,6 +40,12 @@ app.post("/todo", (req, res)=>{
 
 app.put("/todo", (req, res)=>{
     // 할일 수정
+    const idx = todoList.findIndex((item) => {
+        return item.no === parseInt(req.body.no);
+    });
+    if(idx != -1) {
+        todoList[idx] = req.body;
+    }
     res.send(todoList);
 });
 
