@@ -1,6 +1,5 @@
 import "./App.css";
 import {useState} from "react";
-import ItemRow from "./ItemRow";
 import Input from "./Input";
 import Output from "./Output";
 
@@ -61,7 +60,7 @@ const App = ()=>{
         <Input onClickEvent={onClickEvent} />
 
         {/* todo 목록이 출력 되는 콤포넌트 위치 */}
-        <Output />
+        <Output todoList={todoList} onDelete={onDelete} onDoneFlag={onDoneFlag} onEdit={onEdit} />
     </div>);
 }
 
